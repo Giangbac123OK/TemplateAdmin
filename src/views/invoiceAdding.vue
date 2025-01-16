@@ -313,6 +313,7 @@ import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { globalState } from '../../store';
 
 // Khởi tạo danh sách hóa đơn
 const invoices = ref([
@@ -688,7 +689,7 @@ async function submitInvoice() {
     apiUrl = `https://localhost:7297/api/Hoadon/create/khtt?diemSuDung=${diemSuDung}`;
 
     requestData = {
-      idnv: 1, // ID nhân viên
+      idnv: globalState.userId, // ID nhân viên
       idkh: invoice.customer.selectedCustomerId || 0, // ID khách hàng thân thiết
       tongtiencantra: totalAmount.value, // Tổng tiền cần trả
       tongtiensanpham: totalAmountBeforeDiscount.value, // Tổng tiền sản phẩm trước giảm giá
@@ -701,7 +702,7 @@ async function submitInvoice() {
   } else {
     apiUrl = 'https://localhost:7297/api/Hoadon/create';
     requestData = {
-      idnv: 1, // ID nhân viên
+      idnv: globalState.userId, // ID nhân viên
       tongtiencantra: totalAmount.value, // Tổng tiền cần trả
       tongtiensanpham: totalAmountBeforeDiscount.value, // Tổng tiền sản phẩm trước giảm giá
       ghichu: '', // Ghi chú (nếu có)

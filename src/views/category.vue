@@ -220,7 +220,16 @@ const fetchProductDetails = async () => {
         });
       }
     } else {
-      alert(`Không có sản phẩm nào phù hợp với sản phẩm ${productName}.`);
+      Swal.fire({
+        icon: "error",
+        title: `Không có sản phẩm nào phù hợp với sản phẩm ${productName}.`,
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       console.log(productName);
     }
   } catch (error) {
@@ -280,7 +289,16 @@ const addNewDetail = (attributeId, attributeObj) => {
   if (tenthuoctinhchitiet) {
     const newDetailName = tenthuoctinhchitiet.trim();
     if (newDetailName === '') {
-      alert('Tên thuộc tính chi tiết không được để trống.');
+      Swal.fire({
+        icon: "warning",
+        title: 'Tên thuộc tính chi tiết không được để trống.',
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       return;
     }
 
@@ -289,7 +307,16 @@ const addNewDetail = (attributeId, attributeObj) => {
       detail.tenthuoctinhchitiet.toLowerCase()
     );
     if (existingDetails.includes(newDetailName.toLowerCase())) {
-      alert('Tên thuộc tính chi tiết đã tồn tại. Vui lòng chọn tên khác.');
+      Swal.fire({
+        icon: "error",
+        title: 'Tên thuộc tính chi tiết đã tồn tại. Vui lòng chọn tên khác.',
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       return;
     }
 
@@ -383,7 +410,16 @@ const addNewProduct = async () => {
 
     // Nếu có bất kỳ lỗi nào, hiển thị thông báo và dừng xử lý
     if (errorMessages.length > 0) {
-      alert(errorMessages.join('\n'));
+      Swal.fire({
+        icon: "error",
+        title: errorMessages.join('\n'),
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       return;
     }
 
@@ -396,13 +432,31 @@ const addNewProduct = async () => {
         thuoctinhchitiets.push({ idtt, tenthuoctinhchitiet: tenthuoctinhchitiet });
       } else {
         errorMessages.push(`Không tìm thấy ID cho thuộc tính chi tiết: ${tenthuoctinhchitiet}`);
-        alert(errorMessages.join('\n'));
+        Swal.fire({
+          icon: "error",
+          title: errorMessages.join('\n'),
+          background: '#1a202c',
+          color: '#f8f9fa',
+          confirmButtonColor: '#C10C99',
+          cancelButtonColor: '#C10C99',
+          iconColor: '#C10C99',
+          buttonsStyling: true,
+        });
         return;
       }
     }
 
     if (!mota || thuoctinhchitiets.length === 0) {
-      alert('Vui lòng nhập đầy đủ thông tin và chọn ít nhất một thuộc tính chi tiết.');
+      Swal.fire({
+        icon: "error",
+        title: 'Vui lòng nhập đầy đủ thông tin và chọn ít nhất một thuộc tính chi tiết.',
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       return;
     }
 
@@ -422,7 +476,16 @@ const addNewProduct = async () => {
     });
 
     if (isDuplicate) {
-      alert('Phân loại thuộc tính đã tồn tại cho sản phẩm này. Vui lòng chọn phân loại khác.');
+      Swal.fire({
+        icon: "error",
+        title: 'Phân loại thuộc tính đã tồn tại cho sản phẩm này. Vui lòng chọn phân loại khác.',
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       return;
     }
 
@@ -436,7 +499,16 @@ const addNewProduct = async () => {
       giaban = result.giaban || 0;
     } catch (error) {
       console.error('Lỗi khi lấy thông tin sản phẩm:', error);
-      alert('Có lỗi xảy ra khi lấy thông tin sản phẩm.');
+      Swal.fire({
+        icon: "error",
+        title: 'Có lỗi xảy ra khi lấy thông tin sản phẩm.',
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       return;
     }
 
@@ -462,7 +534,16 @@ const addNewProduct = async () => {
     );
 
     if (response.ok) {
-      alert('Phân loại sản phẩm đã được thêm thành công!');
+      Swal.fire({
+        icon: "success",
+        title: 'Phân loại sản phẩm đã được thêm thành công!',
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       // Cập nhật số lượng sản phẩm
       const updateQuantityResponse = await fetch(
         `https://localhost:7297/api/Sanpham/${productId}/add-soluong/Admin`,
@@ -476,7 +557,16 @@ const addNewProduct = async () => {
       );
 
       if (updateQuantityResponse.ok) {
-        alert('Số lượng sản phẩm đã được cập nhật thành công!');
+        Swal.fire({
+          icon: "success",
+          title: 'Số lượng sản phẩm đã được cập nhật thành công!',
+          background: '#1a202c',
+          color: '#f8f9fa',
+          confirmButtonColor: '#C10C99',
+          cancelButtonColor: '#C10C99',
+          iconColor: '#C10C99',
+          buttonsStyling: true,
+        });
         resetForm();
         products.splice(0, products.length); // Xóa danh sách hiện tại
         await fetchProductDetails(); // Làm mới danh sách sản phẩm
@@ -488,19 +578,46 @@ const addNewProduct = async () => {
         } catch (e) {
           console.error('Không thể phân tích JSON lỗi từ cập nhật số lượng.');
         }
-        alert(errorMessage);
+        Swal.fire({
+          icon: "error",
+          title: errorMessage,
+          background: '#1a202c',
+          color: '#f8f9fa',
+          confirmButtonColor: '#C10C99',
+          cancelButtonColor: '#C10C99',
+          iconColor: '#C10C99',
+          buttonsStyling: true,
+        });
         console.error(await updateQuantityResponse.text());
       }
     } else {
       const errorData = await response.json();
       const errorMessage = errorData.message || 'Vui lòng thử lại.';
-      alert(`Lỗi sản phẩm chi tiết: ${errorMessage}`);
+      Swal.fire({
+        icon: "error",
+        title: `Lỗi sản phẩm chi tiết: ${errorMessage}`,
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       console.error('Chi tiết lỗi:', errorData);
     }
 
     
   } catch (error) {
-    alert('Lỗi kết nối với API.');
+    Swal.fire({
+      icon: "error",
+      title: 'Lỗi kết nối với API.',
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
     console.error(error);
   }
 };
@@ -556,7 +673,16 @@ try {
 
   // Nếu có bất kỳ lỗi nào, hiển thị thông báo và dừng xử lý
   if (errorMessages.length > 0) {
-    alert(errorMessages.join('\n'));
+    Swal.fire({
+      icon: "error",
+      title: errorMessages.join('\n'),
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
     return;
   }
 
@@ -569,13 +695,31 @@ try {
       thuoctinhchitiets.push({ idtt, tenthuoctinhchitiet: tenthuoctinhchitiet });
     } else {
       errorMessages.push(`Không tìm thấy ID cho thuộc tính chi tiết: ${tenthuoctinhchitiet}`);
-      alert(errorMessages.join('\n'));
+      Swal.fire({
+        icon: "error",
+        title: errorMessages.join('\n'),
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       return;
     }
   }
 
   if (!mota || thuoctinhchitiets.length === 0) {
-    alert('Vui lòng nhập đầy đủ thông tin và chọn ít nhất một thuộc tính chi tiết.');
+    Swal.fire({
+      icon: "error",
+      title: 'Vui lòng nhập đầy đủ thông tin và chọn ít nhất một thuộc tính chi tiết.',
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
     return;
   }
 
@@ -587,7 +731,16 @@ try {
 
   // Kiểm tra trùng lặp, loại trừ sản phẩm hiện tại đang chỉnh sửa
   if (isClassificationDuplicate(newClassification, currentEditingProductId.value)) {
-    alert('Phân loại thuộc tính đã tồn tại cho sản phẩm khác. Vui lòng chọn phân loại khác.');
+    Swal.fire({
+      icon: "error",
+      title: 'Phân loại thuộc tính đã tồn tại cho sản phẩm khác. Vui lòng chọn phân loại khác.',
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
     return;
   }
 
@@ -599,7 +752,16 @@ try {
 
   const idspct = currentEditingProductId.value;
   if (!idspct) {
-    alert('Không xác định được sản phẩm cần cập nhật.');
+    Swal.fire({
+      icon: "error",
+      title: 'Không xác định được sản phẩm cần cập nhật.',
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
     return;
   }
 
@@ -615,18 +777,45 @@ try {
   );
 
   if (response.ok || response.status === 204) {
-    alert('Sản phẩm đã được cập nhật thành công!');
+    Swal.fire({
+      icon: "success",
+      title: 'Sản phẩm đã được cập nhật thành công!',
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
     resetForm();
     products.splice(0, products.length); // Xóa danh sách hiện tại
     await fetchProductDetails(); // Làm mới danh sách sản phẩm
   } else {
     const errorText = await response.text();
     console.error('Lỗi từ server:', errorText);
-    alert(`Lỗi khi cập nhật sản phẩm: ${response.status} - ${response.statusText}`);
+    Swal.fire({
+      icon: "error",
+      title: `Lỗi khi cập nhật sản phẩm: ${response.status} - ${response.statusText}`,
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
   }
 } catch (error) {
   console.error('Lỗi khi cập nhật sản phẩm:', error);
-  alert('Có lỗi xảy ra khi cập nhật sản phẩm. Vui lòng thử lại.');
+  Swal.fire({
+    icon: "error",
+    title: 'Có lỗi xảy ra khi cập nhật sản phẩm. Vui lòng thử lại.',
+    background: '#1a202c',
+    color: '#f8f9fa',
+    confirmButtonColor: '#C10C99',
+    cancelButtonColor: '#C10C99',
+    iconColor: '#C10C99',
+    buttonsStyling: true,
+  });
 }
 };
 
@@ -648,10 +837,28 @@ const updateProductStatus = async (id, status) => {
       throw new Error('Lỗi khi cập nhật trạng thái sản phẩm');
     }
 
-    alert('Trạng thái sản phẩm đã được cập nhật thành công!');
+    Swal.fire({
+      icon: "success",
+      title: 'Trạng thái sản phẩm đã được cập nhật thành công!',
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
   } catch (error) {
     console.error('Lỗi khi cập nhật trạng thái sản phẩm:', error);
-    alert('Có lỗi xảy ra khi cập nhật trạng thái sản phẩm.');
+    Swal.fire({
+      icon: "error",
+      title: 'Có lỗi xảy ra khi cập nhật trạng thái sản phẩm.',
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
   }
 };
 
@@ -750,7 +957,16 @@ const editProduct = async (idspct) => {
     currentEditingProductId.value = idspct;
   } catch (error) {
     console.error('Lỗi khi sửa sản phẩm:', error);
-    alert('Có lỗi xảy ra khi sửa sản phẩm. Vui lòng thử lại.');
+    Swal.fire({
+      icon: "error",
+      title: 'Có lỗi xảy ra khi sửa sản phẩm. Vui lòng thử lại.',
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
   }
 };
 
@@ -781,15 +997,42 @@ const deleteProduct = async (productIdToDelete) => {
       }
     );
     if (response.ok) {
-      alert('Sản phẩm đã được xóa thành công');
+      Swal.fire({
+        icon: "success",
+        title: 'Sản phẩm đã được xóa thành công',
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
       products.splice(0, products.length); // Xóa danh sách hiện tại
       await fetchProductDetails(); // Làm mới danh sách sản phẩm
     } else {
-      alert('Lỗi khi xóa sản phẩm');
+      Swal.fire({
+        icon: "error",
+        title: 'Lỗi khi xóa sản phẩm',
+        background: '#1a202c',
+        color: '#f8f9fa',
+        confirmButtonColor: '#C10C99',
+        cancelButtonColor: '#C10C99',
+        iconColor: '#C10C99',
+        buttonsStyling: true,
+      });
     }
   } catch (error) {
     console.error('Lỗi khi xóa sản phẩm:', error);
-    alert('Có lỗi xảy ra khi xóa sản phẩm.');
+    Swal.fire({
+      icon: "error",
+      title: 'Có lỗi xảy ra khi xóa sản phẩm.',
+      background: '#1a202c',
+      color: '#f8f9fa',
+      confirmButtonColor: '#C10C99',
+      cancelButtonColor: '#C10C99',
+      iconColor: '#C10C99',
+      buttonsStyling: true,
+    });
   }
 };
 
